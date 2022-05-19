@@ -32,18 +32,6 @@ const statusList = ["TO DO", "IN PROGRESS", "DONE"];
 const priorityList = ["HIGH", "LOW", "MEDIUM"];
 const categoryList = ["WORK", "HOME", "LEARNING"];
 
-// const validateGivenDate = (req, res, next) => {
-//   const { dueDate } = req.body;
-//   const isDateValid = isValid(new Date(dueDate));
-//   //   console.log("isDateValid: ", isDateValid);
-//   if (isDateValid) {
-//     next();
-//   } else {
-//     res.status(400);
-//     res.send("Invalid Date");
-//   }
-// };
-
 const validateGivenDate = (dueDate) => {
   return isValid(new Date(dueDate));
 };
@@ -346,14 +334,7 @@ app.put("/todos/:todoId/", verifyBodyStats, async (req, res) => {
     updateStatusQuery = `UPDATE todo SET category = '${category}' WHERE id = ${todoId};`;
     message = "Category Updated";
   } else if (dueDate !== "") {
-    const newDueDate = format(
-      new Date(
-        parseInt(dueDate.split("-")[0]),
-        parseInt(dueDate.split("-")[1]) - 1,
-        parseInt(dueDate.split("-")[2])
-      ),
-      "yyy-MM-dd"
-    );
+    const newDueDate = format(new Date(dueDate), "yyy-MM-dd");
     updateStatusQuery = `UPDATE todo SET due_date = ${newDueDate} WHERE id = ${todoId};`;
     message = "Due Date Updated";
   }
