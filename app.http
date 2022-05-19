@@ -1,0 +1,266 @@
+
+# home -> fine
+GET http://localhost:4000/
+
+###
+
+# just get api -> fine
+GET http://localhost:4000/todos/
+
+###
+
+# get with search_q query parameters -> fine
+GET http://localhost:4000/todos/?search_q=Buy
+
+###
+
+# with status -> fine
+GET http://localhost:4000/todos/?status=TO%20DO
+
+###
+
+
+# with invalid status --> fine
+GET http://localhost:4000/todos/?status=TODO
+
+###
+
+# with priority -> fine
+GET http://localhost:4000/todos/?priority=HIGH
+
+###
+
+# with invalid priority --> fine
+GET http://localhost:4000/todos/?priority=HIGHER
+
+###
+
+# with category -> fine
+GET http://localhost:4000/todos/?category=HOME
+
+###
+
+# with invalid category --> fine
+GET http://localhost:4000/todos/?category=HOUSE
+
+###
+
+# status and priority queries -> fine
+GET http://localhost:4000/todos/?status=IN%20PROGRESS&priority=HIGH
+
+###
+
+# invalid status and priority queries --> fine
+GET http://localhost:4000/todos/?status=INPROGRESS&priority=HIGH
+
+###
+
+# status and invalid priority queries --> fine
+GET http://localhost:4000/todos/?status=IN%20PROGRESS&priority=HIGHER
+
+###
+
+# with status and category queries -> fine
+GET http://localhost:4000/todos/?status=DONE&category=WORK
+
+###
+
+# with invalid status and category queries --> fine
+GET http://localhost:4000/todos/?status=DONED&category=WORK
+
+###
+
+# with status and invalid category queries --> fine
+GET http://localhost:4000/todos/?status=DONE&category=WORKING
+
+###
+
+# with category and priority queries --> fine
+GET http://localhost:4000/todos/?priority=HIGH&category=LEARNING
+
+
+###
+
+# with invalid category and priority queries --> fine
+GET http://localhost:4000/todos/?priority=HIGH&category=LEARN
+
+###
+
+# with category and invalid priority queries --> fine
+GET http://localhost:4000/todos/?priority=HIGHER&category=LEARNING
+
+###
+
+# todo with id -> fine
+GET http://localhost:4000/todos/2/
+
+
+###
+
+# agenda due_date API --> fine
+GET http://localhost:4000/agenda/?date=2020-09-22
+
+###
+
+# agenda invalid due_date API --> fine
+GET http://localhost:4000/agenda/?date=2020-19-22
+
+###
+
+# add todo --> fine
+POST http://localhost:4000/todos/
+Content-Type: application/json
+
+{
+ "id": 10,
+ "todo": "Finalize event theme",
+ "priority": "HIGH",
+ "status": "TO DO",
+ "category": "HOME",
+ "dueDate": "2022-05-18"
+}
+
+###
+
+# add todo with invalid status --> fine
+POST http://localhost:4000/todos/
+Content-Type: application/json
+
+{
+ "id": 6,
+ "todo": "Finalize event theme",
+ "priority": "LOW",
+ "status": "TODO",
+ "category": "HOME",
+ "dueDate": "2021-02-22"
+}
+
+###
+
+# add todo with invalid priority --> fine
+POST http://localhost:4000/todos/
+Content-Type: application/json
+
+{
+ "id": 6,
+ "todo": "Finalize event theme",
+ "priority": "LOWER",
+ "status": "TO DO",
+ "category": "HOME",
+ "dueDate": "2021-02-22"
+}
+
+###
+
+# add todo with invalid category --> fine
+POST http://localhost:4000/todos/
+Content-Type: application/json
+
+{
+ "id": 6,
+ "todo": "Finalize event theme",
+ "priority": "LOW",
+ "status": "TO DO",
+ "category": "HOUSE",
+ "dueDate": "2021-02-22"
+}
+
+###
+
+# add todo with invalid date --> fine
+POST http://localhost:4000/todos/
+Content-Type: application/json
+
+{
+ "id": 6,
+ "todo": "Finalize event theme",
+ "priority": "LOW",
+ "status": "TO DO",
+ "category": "HOME",
+ "dueDate": "2021-21-22"
+}
+
+###
+
+# update status with id -> fine
+PUT http://localhost:4000/todos/1/
+Content-Type: application/json
+
+{
+"status": "IN PROGRESS"
+}
+
+###
+
+# update status with id with invalid status --> fine
+PUT http://localhost:4000/todos/1/
+Content-Type: application/json
+
+{
+"status": "IN PROGRESSS"
+}
+
+###
+
+# update priority with id -> fine
+PUT http://localhost:4000/todos/1/
+Content-Type: application/json
+ 
+{
+    "priority": "HIGH"
+}
+
+###
+
+# update priority with id with invalid priority --> fine
+PUT http://localhost:4000/todos/1/
+Content-Type: application/json
+ 
+{
+    "priority": "HIGHER"
+}
+
+###
+
+# update todo in todo table with id -> fine
+PUT http://localhost:4000/todos/1/
+Content-Type: application/json
+
+{
+"todo": "Clean the garden"
+}
+
+###
+
+# update category with id -> fine
+PUT http://localhost:4000/todos/1/
+Content-Type: application/json
+
+{
+"category": "LEARNING"
+}
+
+###
+
+# update category with id with invalid category --> fine
+PUT http://localhost:4000/todos/1/
+Content-Type: application/json
+
+{
+"category": "LEARN"
+}
+
+###
+
+# update dueDate with id with invalid date --> fine
+PUT http://localhost:4000/todos/1/
+Content-Type: application/json
+
+{
+"dueDate": "2020-15-25"
+}
+
+###
+
+# delete todo -> fine
+DELETE http://localhost:4000/todos/10/
